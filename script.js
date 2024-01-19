@@ -13,6 +13,37 @@ function buttonClicked() {
     renderTodoList();
 }
 
+// a more effecient way without usig closures
+function renderTodoList() {
+    itemsAddeddiv.innerHTML = "";
+
+    todoList.forEach(function (todo, index) {
+        var newPara = document.createElement("p");
+        var newBtn = document.createElement("button");
+        newBtn.innerText = "Delete";
+
+        newBtn.onclick = function () {
+            deleteItem(index);
+        };
+
+        newPara.textContent = todo.name + " " + todo.date;
+
+        newPara.appendChild(newBtn);
+        itemsAddeddiv.appendChild(newPara);
+    });
+}
+
+function deleteItem(index) {
+    // Remove the item at the specified index from the todoList
+    todoList.splice(index, 1);
+
+    // Refresh the displayed items after deletion
+    renderTodoList();
+}
+
+
+
+/*
 function renderTodoList() {
     itemsAddeddiv.innerHTML = "";
 
@@ -42,3 +73,4 @@ function deleteItem(index) {
     // Refresh the displayed items after deletion
     renderTodoList();
 }
+*/
